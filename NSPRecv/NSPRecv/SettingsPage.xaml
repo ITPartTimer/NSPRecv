@@ -6,10 +6,48 @@
              Title="NSP - Settings Page">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Coming Soon"
-                FontSize="Large"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <StackLayout>
+                <Label Text="Initials:" FontSize="Small" HorizontalTextAlignment="Start"/>
+                <Entry x:Name="Initials" Placeholder="Enter Initials(;)"/>
+                <Label Text="To(s):" FontSize="Small" HorizontalTextAlignment="Start"/>
+                <Entry x:Name="Tos" Placeholder="Enter To: emails (;)"/>
+                <Label Text="From:" FontSize="Small" HorizontalTextAlignment="Start"/>
+                <Entry x:Name="From" Placeholder="Enter From: email"/>
+                <Label Text="Host:" FontSize="Small" HorizontalTextAlignment="Start"/>
+                <Entry x:Name="Host" Placeholder="smtp.hostname.com"/>
+                <Label Text="Pwd:" FontSize="Small" HorizontalTextAlignment="Start"/>
+                <Entry x:Name="Pwd" Placeholder="Password for From: email"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="Port:" 
+                           Grid.Row="0" Grid.Column="0"
+                           FontSize="Small" HorizontalTextAlignment="Start"/>
+                    <Entry x:Name="Port" 
+                            Grid.Row="0" Grid.Column="0"
+                           Placeholder="Enter Initials(;)"/>
+
+                    <Label Text="TLS/SSL:" 
+                           Grid.Row="0" Grid.Column="1"
+                           FontSize="Small" HorizontalTextAlignment="Start"/>
+                    <Switch x:Name="TLS"
+                            Grid.Row="0" Grid.Column="1"
+                            IsToggled="True" HorizontalOptions="Center"/>
+                </Grid>
+            </StackLayout>
+            <StackLayout>
+                <Button x:Name="btnSavePrefs"
+                        BackgroundColor="Green" FontSize="Large" FontAttributes="Bold"
+                        Text="SAVE"
+                        Margin="10,10,10,0"
+                        Clicked="Save_Clicked"/>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
