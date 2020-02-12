@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:NSPRecv"
+             BackgroundColor="PowderBlue"
+             x:Class="NSPRecv.MainPage"
+             Title="NSP - Scan Page">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        
+        <Button x:Name="Send" 
+                Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
+                BackgroundColor="Green" FontSize="Large" FontAttributes="Bold"
+                Text="SEND"
+                Margin="10,10,10,0"
+                Clicked="Send_Clicked"/>
+        
+        <Editor x:Name="Tags" 
+                Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                BackgroundColor="White" TextColor="Black" FontSize="Large"
+                Margin="10,10,10,0"
+                Placeholder="Scan Tags Here"/>
+
+        <Button x:Name="Clear" 
+                Grid.Row="2" Grid.Column="0" 
+                BackgroundColor="Red" FontSize="Large" FontAttributes="Bold"
+                Margin="10,10,20,10"
+                Text="CLEAR"
+                Clicked="Clear_Clicked"/>
+
+        <Button x:Name="Settings" 
+                Grid.Row="2" Grid.Column="1" 
+                BackgroundColor="Gray" FontSize="Large" FontAttributes="Bold"
+                Margin="20,10,10,10"
+                Text="SETTINGS"
+                Clicked="Settings_Clicked"/>
+    </Grid>
+
+</ContentPage>

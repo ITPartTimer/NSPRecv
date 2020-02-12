@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NSPRecv.ConfPage"
+             Title="NSP - Confirmation">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".5*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0"
+               TextColor="Black" FontSize="Large" FontAttributes="Bold"
+               Text="Tags Send"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"/>
+        
+        <Label x:Name="Conf"
+               Grid.Row="1" Grid.Column="0"
+               TextColor="Black" FontSize="36" FontAttributes="Bold"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Start"/>
+
+        <Label x:Name="TagsSent"
+               Grid.Row="2" Grid.Column="0"
+               TextColor="Black" FontSize="Large"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Start"/>
+
+    </Grid>
+</ContentPage>
