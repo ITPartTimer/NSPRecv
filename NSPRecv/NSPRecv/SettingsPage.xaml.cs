@@ -15,14 +15,14 @@ namespace NSPRecv
 		public SettingsPage ()
 		{
 			InitializeComponent ();
-
-
-           
         }
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+
+            // Clear message
+            Msg.Text = "";
 
             try
             {
@@ -78,6 +78,7 @@ namespace NSPRecv
             try
             {
                 var pwd = await SecureStorage.GetAsync("pwd");
+
                 Pwd.Text = pwd.ToString();
             }
             catch (Exception ex)
@@ -115,13 +116,23 @@ namespace NSPRecv
             }
 
             // Return to main page
-            await Navigation.PushAsync(new MainPage());
+            await Navigation.PopAsync();
         }
 
         private void Clear_Clicked(object sender, EventArgs a)
         {
-            Preferences.Clear();
+            // Remove items from Xamarin Essentials
+            try
+            {
+                Preferences.Clear();
+                SecureStorage.Remove("pwd");
+            }
+            catch (Exception ex)
+            {
+                Msg.Text = ex.Message.ToString();
+            }
 
+            // Clear screen
             Initials.Text = "";
             Tos.Text = "";
             From.Text = "";
