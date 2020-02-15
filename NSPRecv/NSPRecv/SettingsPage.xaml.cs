@@ -57,12 +57,6 @@ namespace NSPRecv
                     Host.Text = v.ToString();
                 }
 
-                //if (Preferences.ContainsKey("Pwd"))
-                //{
-                //    var v = Preferences.Get("Pwd", "EDL8ywDDePiT");
-                //    Pwd.Text = v.ToString();
-                //}
-
                 if (Preferences.ContainsKey("TLS"))
                 {
                     var v = Preferences.Get("TLS", true);
@@ -74,16 +68,17 @@ namespace NSPRecv
                     var v = Preferences.Get("Port", 587);
                     Port.Text = v.ToString();
                 }
+            }
+            catch (Exception ex)
+            {
+                Msg.Text = ex.Message.ToString();
+            }
 
-                try
-                {
-                    var pwd = await SecureStorage.GetAsync("pwd");
-                    Pwd.Text = pwd.ToString();
-                }
-                catch (Exception ex)
-                {
-                    Msg.Text = ex.Message.ToString();
-                }
+            // Pwd is secure storage
+            try
+            {
+                var pwd = await SecureStorage.GetAsync("pwd");
+                Pwd.Text = pwd.ToString();
             }
             catch (Exception ex)
             {
@@ -94,7 +89,6 @@ namespace NSPRecv
         private async void Save_Clicked(object sender, EventArgs e)
         {
             // Set Preferences from values entered
-            // Trap for empty fields
             try
             {
                 Preferences.Set("Inits", Initials.Text.ToString().ToUpper());
@@ -102,7 +96,6 @@ namespace NSPRecv
                 Preferences.Set("From", From.Text.ToString());
                 Preferences.Set("Ccopy", Ccopy.Text.ToString());
                 Preferences.Set("Host", Host.Text.ToString());
-                //Preferences.Set("Pwd", Pwd.Text.ToString());
                 Preferences.Set("Port", Convert.ToInt32(Port.Text));
                 Preferences.Set("TLS", Convert.ToBoolean(TLS.IsToggled));
             }
@@ -111,6 +104,7 @@ namespace NSPRecv
                 Msg.Text = ex.Message.ToString();
             }
 
+            // Pwd is secure storage
             try
             {
                 await SecureStorage.SetAsync("pwd", Pwd.Text.ToString());
