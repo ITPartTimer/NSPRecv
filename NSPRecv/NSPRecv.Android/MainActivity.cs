@@ -16,7 +16,7 @@ namespace NSPRecv.Droid
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;           
 
-            //Boilerplate for Xamarin.Essentials          
+            // REQUIRED Boilerplate for Xamarin.Essentials          
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
@@ -25,7 +25,7 @@ namespace NSPRecv.Droid
             LoadApplication(new App());
         }
 
-        //Boilerplate for Xamarin.Essentials 
+        // REQUIRED Boilerplate for Xamarin.Essentials 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);

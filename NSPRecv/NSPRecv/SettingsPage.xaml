@@ -20,25 +20,28 @@
                     <Label Text="Host:" FontSize="Small" HorizontalTextAlignment="Start"/>
                     <Entry x:Name="Host" Placeholder="smtp.hostname.com"/>
                     <Label Text="Pwd:" FontSize="Small" HorizontalTextAlignment="Start"/>
-                    <Entry x:Name="Pwd" Placeholder="Password for From: email"/>
+                    <Entry x:Name="Pwd" Placeholder="Password for From: email" IsPassword="True"/>
                     <Label Text="Port:" FontSize="Small" HorizontalTextAlignment="Start"/>
                     <Entry x:Name="Port" Placeholder="SMTP Port"/>
                     <Label Text="TLS:" FontSize="Small" HorizontalTextAlignment="Start"/>
                     <Switch x:Name="TLS" IsToggled="True" HorizontalOptions="Start"/>
                 </StackLayout>
             </ScrollView>
+            <StackLayout>
+                <Label x:Name="Msg" FontSize="Micro" TextColor="Red"  Margin="10,0,0,0"/>
+            </StackLayout>
             <StackLayout Orientation="Horizontal" Margin="0,0,0,10">
                 <Button x:Name="btnSavePrefs"
                     BackgroundColor="Green" FontSize="Large" FontAttributes="Bold"
                     HorizontalOptions="FillAndExpand"
                     Text="SAVE"
-                    Margin="10,10,10,0"
+                    Margin="10,0,10,0"
                     Clicked="Save_Clicked"/>
                 <Button x:Name="btnClearPrefs"
                     BackgroundColor="Red" FontSize="Large" FontAttributes="Bold"
                     HorizontalOptions="FillAndExpand"
                     Text="CLEAR"
-                    Margin="10,10,10,0"
+                    Margin="10,0,10,0"
                     Clicked="Clear_Clicked"/>
             </StackLayout>
         </StackLayout>

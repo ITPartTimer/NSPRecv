@@ -66,8 +66,8 @@ namespace NSPRecv
             }
             catch (Exception ex)
             {
-                sent = false;
-                msg = "FAILED" + "\n" + ex.Message.ToString();
+                Msg.Text = ex.Message.ToString();
+                return;
             }
 
             Navigation.PushAsync(new ConfPage(msg, Tags.Text));
