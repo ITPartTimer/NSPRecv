@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Mail;
 using System.IO;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace NSPRecv
@@ -24,26 +25,40 @@ namespace NSPRecv
 
         private void Send_Clicked(object sender, EventArgs e)
         {
-            bool sent = true;
             string msg = "";
 
             try
             {
+                // Get Preferences
+                var hst = Preferences.Get("Host", "");
+                var frm = Preferences.Get("From", "");
+                var tos = Preferences.Get("Tos", "");
+                var Cc = Preferences.Get("Ccopy", "");
+                var prt = Preferences.Get("Port", 0);
+                var pwd = Preferences.Get("Pwd", "");
+                var tls = Preferences.Get("TLS", true);
+
                 MailMessage mail = new MailMessage();
 
-                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-                mail.From = new MailAddress("nsp.recv@gmail.com");
-                mail.To.Add("pmorales@calstripsteel.com");
-                mail.To.Add("tlaster@calstripsteel.com");
-                //mail.To.Add("scott.clemons317@outlook.com");
-                mail.CC.Add("sclemons@calstripsteel.com");
+                SmtpClient SmtpServer = new SmtpClient(hst);
+                mail.From = new MailAddress(frm);
+
+                List<string> lstTos = tos.Split(',').ToList<string>();
+
+                foreach (string s in lstTos)
+                {
+                    mail.To.Add(s);
+                }
+
+                mail.CC.Add(Cc);
+
                 mail.Subject = "NSP Receiving Scans";
                 mail.Body = DateTime.Today.ToString("d") + "\n\n" + Tags.Text;
 
-                SmtpServer.Port = 587;
-                SmtpServer.Host = "smtp.gmail.com";
-                SmtpServer.Credentials = new System.Net.NetworkCredential("nsp.recv@gmail.com","A8dg2h8q");
-                SmtpServer.EnableSsl = true;
+                SmtpServer.Port = Convert.ToInt32(prt);
+                SmtpServer.Host = hst;
+                SmtpServer.Credentials = new System.Net.NetworkCredential(frm, pwd);
+                SmtpServer.EnableSsl = tls;
 
                 SmtpServer.Send(mail);
 
@@ -52,7 +67,7 @@ namespace NSPRecv
             catch (Exception ex)
             {
                 sent = false;
-                msg = "FAILED" + "\n" + ex.InnerException.ToString();
+                msg = "FAILED" + "\n" + ex.Message.ToString();
             }
 
             Navigation.PushAsync(new ConfPage(msg, Tags.Text));
