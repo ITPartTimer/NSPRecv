@@ -27,47 +27,13 @@ namespace NSPRecv
             try
             {
                 // Try to get Keys.  If there are no values, defaults are used
-                if (Preferences.ContainsKey("Inits"))
-                {
-                    var v = Preferences.Get("Inits", "ABC,XYZ");
-                    Initials.Text = v.ToString();
-                }
-
-                if (Preferences.ContainsKey("Tos"))
-                {
-                    var v = Preferences.Get("Tos", "cscottierun@gmail.com,scott.clemons317@outlook.com");
-                    Tos.Text = v.ToString();
-                }
-
-                if (Preferences.ContainsKey("From"))
-                {
-                    var v = Preferences.Get("From", "nsp.scan@calstripsteel.com");
-                    From.Text = v.ToString();
-                }
-
-                if (Preferences.ContainsKey("Ccopy"))
-                {
-                    var v = Preferences.Get("Ccopy", "sclemons@calstripsteel.com");
-                    Ccopy.Text = v.ToString();
-                }
-
-                if (Preferences.ContainsKey("Host"))
-                {
-                    var v = Preferences.Get("Host", "smtp.office365.com");
-                    Host.Text = v.ToString();
-                }
-
-                if (Preferences.ContainsKey("TLS"))
-                {
-                    var v = Preferences.Get("TLS", true);
-                    TLS.IsTabStop = Convert.ToBoolean(v);
-                }
-
-                if (Preferences.ContainsKey("Port"))
-                {
-                    var v = Preferences.Get("Port", 587);
-                    Port.Text = v.ToString();
-                }
+                Initials.Text = Preferences.Get("Inits", "ABC,XYZ").ToString();               
+                Tos.Text = Preferences.Get("Tos", "tlaster@calstripsteel.com,pmorales@calstripsteel.com").ToString();
+                From.Text = Preferences.Get("From", "nsp.scan@calstripsteel.com").ToString();                
+                Ccopy.Text = Preferences.Get("Ccopy", "sclemons@calstripsteel.com").ToString();
+                Host.Text = Preferences.Get("Host", "smtp.office365.com").ToString();
+                TLS.IsToggled = Convert.ToBoolean(Preferences.Get("TLS", true));
+                Port.Text = Preferences.Get("Port", 587).ToString();
             }
             catch (Exception ex)
             {
@@ -79,7 +45,11 @@ namespace NSPRecv
             {
                 var pwd = await SecureStorage.GetAsync("pwd");
 
-                Pwd.Text = pwd.ToString();
+                // On 1st load, it will e null, so create a default
+                if(pwd != null)
+                    Pwd.Text = pwd.ToString();
+                else
+                    Pwd.Text = string.Empty;
             }
             catch (Exception ex)
             {
@@ -132,7 +102,11 @@ namespace NSPRecv
                 Msg.Text = ex.Message.ToString();
             }
 
-            // Clear screen
+            /*
+             * Clear screen.  If you leave without SAVE
+             * fields will be popluated by defaults.
+             * Password will be empty
+             */
             Initials.Text = "";
             Tos.Text = "";
             From.Text = "";
