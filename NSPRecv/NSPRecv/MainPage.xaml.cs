@@ -29,7 +29,7 @@ namespace NSPRecv
                 pckQty.SelectedIndex = -1;
         }
 
-        private void Send_Clicked(object sender, EventArgs e)
+        private async void Send_Clicked(object sender, EventArgs e)
         {
             string msg = "";
 
@@ -53,8 +53,10 @@ namespace NSPRecv
                 var tos = Preferences.Get("Tos", "");
                 var Cc = Preferences.Get("Ccopy", "");
                 var prt = Preferences.Get("Port", 0);
-                var pwd = Preferences.Get("Pwd", "");
                 var tls = Preferences.Get("TLS", true);
+
+                // Secure Storage
+                var pwd = await SecureStorage.GetAsync("pwd");
 
                 MailMessage mail = new MailMessage();
 
@@ -75,7 +77,7 @@ namespace NSPRecv
 
                 SmtpServer.Port = Convert.ToInt32(prt);
                 SmtpServer.Host = hst;
-                SmtpServer.Credentials = new System.Net.NetworkCredential(frm, pwd);
+                SmtpServer.Credentials = new System.Net.NetworkCredential(frm, pwd.ToString());
                 SmtpServer.EnableSsl = tls;
 
                 SmtpServer.Send(mail);
@@ -88,7 +90,7 @@ namespace NSPRecv
                 return;
             }
 
-            Navigation.PushAsync(new ConfPage(msg, Tags.Text));
+            await Navigation.PushAsync(new ConfPage(msg, Tags.Text));
         }
 
         private async void Settings_Clicked(object sender, EventArgs e)
