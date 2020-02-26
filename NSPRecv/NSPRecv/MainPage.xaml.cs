@@ -72,8 +72,10 @@ namespace NSPRecv
 
                 mail.CC.Add(Cc);
 
-                mail.Subject = "NSP - " + pckInits.Items[pckInits.SelectedIndex] + " - " + pckQty.Items[pckQty.SelectedIndex] + " - " + Ven.Text.ToString().ToUpper();
-                mail.Body = DateTime.Today.ToString("d") + "\n" + Tags.Text;
+                string sbj = "NSP - " + pckInits.Items[pckInits.SelectedIndex] + " - " + pckQty.Items[pckQty.SelectedIndex] + " - " + Ven.Text.ToString().ToUpper();
+
+                mail.Subject = "NSP Receiving Scans";
+                mail.Body = sbj + "\n" + Tags.Text;
 
                 SmtpServer.Port = Convert.ToInt32(prt);
                 SmtpServer.Host = hst;
